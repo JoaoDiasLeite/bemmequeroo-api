@@ -4,32 +4,34 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-const mongoose = require('mongoose');
-
 require('dotenv').config();
-
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testAPIRouter = require('./routes/sendData');
-const bodyParser = require('body-parser');
-
 
 var app = express();
-
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, 
-    { useNewUrlParser: true, useUnifiedTopology: true,}
-    );   
-const connection =  mongoose.connection;
-connection.once('open', () => {
-    
-})
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
-app.use(cors());
+app.set("trust proxy", 1);
+app.use(
+  cors({
+    credentials: true,
+    origin: [process.env.FRONTEND_APP_URL]
+  })
+);
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
+    resave: true,
+    saveUninitialized: false,
+    cookie: {
+      sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
+      secure: process.env.NODE_ENV === "production", // must be true if sameSite='none'
+    }
+  })
+);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
