@@ -4,9 +4,9 @@ var nodemailer = require('nodemailer');
 const FormData = require('form-data');
 const upload = require("multer")();
 
-const gpass = process.env.GMAIL_PASS;
-const greq = process.env.GMAIL_REQ;
-const gmain = process.env.GMAIL_MAIN
+const gpass = 'benfas13';
+const greq = 'bemmequero.bordados.pedidos@gmail.com';
+const gmain = 'bemmequero.bordados@gmail.com'
 
 router.get('/' , function(req, res, next){
     res.send('API is working!')
