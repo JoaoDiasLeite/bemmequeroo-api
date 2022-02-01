@@ -9,27 +9,10 @@ const greq = process.env.GMAIL_REQ;
 const gmain = process.env.GMAIL_MAIN
 
 router.get('/' , function(req, res, next){
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    // handle OPTIONS method
-    if ('OPTIONS' == req.method) {
-        res.send('API is working!')
-    } else {
-        next();
-    }
-    
+    res.send('API is working!')
 })
 
 router.post('/',  upload.single('contactFile'),  async (req, res, next) =>{
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    // handle OPTIONS method
-    if ('OPTIONS' == req.method) {
-        
     console.log( req.body);
     const name = req.body.contactName;
     const email = req.body.contactEmail;
@@ -68,10 +51,6 @@ router.post('/',  upload.single('contactFile'),  async (req, res, next) =>{
               smtpTransport.close();
               return error;
           }); 
-          
-    } else {
-            next();
-        }
 })
 
 module.exports = router;
