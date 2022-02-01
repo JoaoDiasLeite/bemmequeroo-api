@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "test": "nodemon ./bin/www",
-    "start": "./node_modules/.bin/netlify-lambda serve src",
-    "build": "./node_modules/.bin/netlify-lambda build src"
+    "start": "node ./bin/www",
+    "build": "build ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.19.1",
