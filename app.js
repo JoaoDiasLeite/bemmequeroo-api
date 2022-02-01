@@ -16,22 +16,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set("trust proxy", 1);
 app.use(
-  cors({
-    credentials: true,
-    origin: [process.env.FRONTEND_APP_URL]
-  })
+  cors()
 );
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
-    resave: true,
-    saveUninitialized: false,
-    cookie: {
-      sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
-      secure: process.env.NODE_ENV === "production", // must be true if sameSite='none'
-    }
-  })
-);
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
