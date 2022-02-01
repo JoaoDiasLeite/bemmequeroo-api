@@ -13,6 +13,8 @@ router.get('/' , function(req, res, next){
 })
 
 router.post('/',  upload.single('contactFile'),  async (req, res, next) =>{
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     console.log( req.body);
     const name = req.body.contactName;
     const email = req.body.contactEmail;
