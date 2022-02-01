@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "test": "nodemon ./bin/www",
-    "start": "node ./bin/www"
+    "start": "./node_modules/.bin/netlify-lambda serve src",
+    "build": "./node_modules/.bin/netlify-lambda build src"
   },
   "dependencies": {
     "body-parser": "^1.19.1",
@@ -19,8 +20,10 @@
     "mongoose": "^6.0.12",
     "morgan": "~1.9.1",
     "multer": "^1.4.4",
+    "netlify-lambda": "^2.0.15",
     "nodemailer": "^6.7.0",
     "nodemailer-smtp-transport": "^2.4.2",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "serverless-http": "^2.7.0"
   }
 }
