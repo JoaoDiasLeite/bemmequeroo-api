@@ -10,8 +10,8 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var indexRouter = require('./routes/index');
+// var usersRouter = require('./routes/users');
 var APIRouter = require('./routes/sendData');
 const bodyParser = require('body-parser');
 
@@ -36,9 +36,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/sendData', APIRouter)
+app.use('/', APIRouter);
+// app.use('/users', usersRouter);
+// app.use('/sendData', APIRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
