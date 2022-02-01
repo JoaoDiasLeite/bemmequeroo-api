@@ -10,8 +10,8 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 var APIRouter = require('./routes/sendData');
 const bodyParser = require('body-parser');
 
@@ -56,4 +56,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports.handler = serverlsess(app);
+module.exports.handler = serverless(app);
