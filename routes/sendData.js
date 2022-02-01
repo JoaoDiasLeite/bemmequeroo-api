@@ -15,11 +15,11 @@ router.get('/' , function(req, res, next){
     res.setHeader('Access-Control-Allow-Credentials', true);
     // handle OPTIONS method
     if ('OPTIONS' == req.method) {
-        return res.sendStatus(200);
+        res.send('API is working!')
     } else {
         next();
     }
-    res.send('API is working!')
+    
 })
 
 router.post('/',  upload.single('contactFile'),  async (req, res, next) =>{
