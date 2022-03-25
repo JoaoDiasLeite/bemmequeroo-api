@@ -15,7 +15,7 @@ router.get('/' , function(req, res, next){
 router.post('/',  upload.single('contactFile'),  async (req, res, next) =>{
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    console.log( req.body);
+    //console.log( req.body)  ---> Debug
     const name = req.body.contactName;
     const email = req.body.contactEmail;
     const subject = req.body.contactSubject;
@@ -37,20 +37,26 @@ router.post('/',  upload.single('contactFile'),  async (req, res, next) =>{
       //html: "<b>Opcionalmente, pode enviar como HTML</b>"
   } 
   if(anexo){
-      console.log(anexo);
+      //console.log(anexo)  ---> Debug
       mail.attachments = [];
       mail.attachments.push({
           filename: anexo.originalname,
           content: anexo.buffer
       })
   }
-  smtpTransport.sendMail(mail)
+  
+  //console.log(mail)  ---> Debug
+
+await smtpTransport.sendMail(mail)
           .then(response => {
               smtpTransport.close();
+              response.status = 200;
+              response.message = "OK";
               return response;
           })
           .catch(error => {
               smtpTransport.close();
+              error.message = "Not OK";
               return error;
           }); 
 })
